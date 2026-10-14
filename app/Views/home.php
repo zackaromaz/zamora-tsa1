@@ -1,57 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Home</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f6f9;
-        }
-
-        .container {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
-        }
-
-        nav {
-            margin-bottom: 15px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #0d6efd;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-    </style>
-
-</head>
-<body>
-
-<div class="container">
-    <h1>Welcome to My POS System</h1>
-
-    <nav>
-        <a href="<?= base_url('home') ?>">Home</a> |
-        <a href="<?= base_url('about') ?>">About</a> |
-        <a href="<?= base_url('customers') ?>">Customers</a> |
-        <a href="<?= base_url('users') ?>">Users</a> |
-    </nav>
-
-    <hr>
-
-    <p>
-        Welcome to the Point of Sale (POS) System built using CodeIgniter 4.
-    </p>
-</div>
-
-</body>
-</html>
+<?= view('partials/header', ['title' => $title]) ?>
+<p class="eyebrow">Daily dashboard</p>
+<h1>Welcome back.</h1>
+<p class="lead">Here are the tasks scheduled for today, <?= esc(date('F j, Y')) ?>.</p>
+<section class="card"><h2>Today's tasks</h2>
+<?php if ($tasks): ?><div class="table-wrap"><table><thead><tr><th>Task</th><th>Status</th><th>Date</th></tr></thead><tbody>
+<?php foreach ($tasks as $task): ?><tr><td><?= esc($task['title']) ?></td><td><span class="badge"><?= esc(ucfirst($task['status'])) ?></span></td><td><?= esc($task['task_date']) ?></td></tr><?php endforeach; ?>
+</tbody></table></div><?php else: ?><p class="empty">No tasks are scheduled for today.</p><?php endif; ?></section>
+<?= view('partials/footer') ?>

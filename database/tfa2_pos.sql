@@ -1,14 +1,9 @@
-CREATE DATABASE IF NOT EXISTS tfa2_pos
-    CHARACTER SET utf8mb4
-    COLLATE utf8mb4_general_ci;
-
-USE tfa2_pos;
-
-CREATE TABLE IF NOT EXISTS customers (
+-- Tasks for Today Management System database export / seed
+CREATE TABLE IF NOT EXISTS tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    full_name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    phone VARCHAR(20),
+    title VARCHAR(150) NOT NULL,
+    status VARCHAR(20) NOT NULL DEFAULT 'pending',
+    task_date DATE NOT NULL,
     created_at DATETIME NOT NULL
 );
 
@@ -16,19 +11,19 @@ CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
     created_at DATETIME NOT NULL
 );
 
-INSERT INTO customers (full_name, email, phone, created_at) VALUES
-('Zack Zamora', 'zack@gmail.com', '09560783357', NOW()),
-('Roanne Acevedo', 'roanne@gmail.com', '09569583782', NOW()),
-('Gian Lorbico', 'gian@gmail.com', '09343573927', NOW()),
-('Ranzel Durias', 'ranzel@gmail.com', '09574982734', NOW()),
-('Mickey San Jose', 'mickey@gmail.com', '09174300953', NOW());
+INSERT INTO tasks (title, status, task_date, created_at) VALUES
+('Review today''s priorities', 'completed', CURDATE(), NOW()),
+('Prepare assessment presentation', 'in progress', CURDATE(), NOW()),
+('Submit project documentation', 'pending', CURDATE(), NOW()),
+('Test all application routes', 'pending', DATE_SUB(CURDATE(), INTERVAL 1 DAY), NOW()),
+('Check database relationships', 'completed', DATE_SUB(CURDATE(), INTERVAL 1 DAY), NOW()),
+('Plan next sprint', 'pending', DATE_ADD(CURDATE(), INTERVAL 1 DAY), NOW()),
+('Update the project README', 'pending', DATE_ADD(CURDATE(), INTERVAL 1 DAY), NOW()),
+('Review feedback with the team', 'pending', DATE_ADD(CURDATE(), INTERVAL 2 DAY), NOW());
 
-INSERT INTO users (username, full_name, created_at) VALUES
-('boss', 'Zack Admin', NOW()),
-('cashier1', 'Roanne Cashier', NOW()),
-('cashier2', 'Gian Cashier', NOW()),
-('staff1', 'Ranzel Staff', NOW()),
-('staff2', 'Mickey Staff', NOW());
+INSERT INTO users (username, full_name, email, created_at) VALUES
+('zackzamora', 'Zack Zamora', 'zackzamora@example.com', NOW());
