@@ -13,7 +13,7 @@ class Users extends BaseController
 
     public function new()
     {
-        if ($this->request->getMethod() === 'post') {
+        if (strtolower($this->request->getMethod()) === 'post') {
             $rules = ['username' => 'required|alpha_numeric|min_length[3]', 'full_name' => 'required|min_length[2]', 'email' => 'required|valid_email'];
             if ($this->validate($rules)) {
                 $model = new UserModel();
@@ -35,7 +35,7 @@ class Users extends BaseController
         if (! $user) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('User not found');
         }
-        if ($this->request->getMethod() === 'post') {
+        if (strtolower($this->request->getMethod()) === 'post') {
             $rules = ['username' => 'required|alpha_numeric|min_length[3]', 'full_name' => 'required|min_length[2]', 'email' => 'required|valid_email'];
             $avatar = $this->request->getFile('avatar');
             if ($avatar && $avatar->getError() !== UPLOAD_ERR_NO_FILE) {

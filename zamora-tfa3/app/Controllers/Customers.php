@@ -14,7 +14,7 @@ class Customers extends BaseController
     public function new()
     {
         $model = new CustomerModel();
-        if ($this->request->getMethod() === 'post') {
+        if (strtolower($this->request->getMethod()) === 'post') {
             $rules = ['full_name' => 'required|min_length[2]', 'email' => 'required|valid_email', 'phone' => 'permit_empty|max_length[20]'];
             if ($this->validate($rules)) {
                 $model->insert([
@@ -36,7 +36,7 @@ class Customers extends BaseController
         if (! $customer) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Customer not found');
         }
-        if ($this->request->getMethod() === 'post') {
+        if (strtolower($this->request->getMethod()) === 'post') {
             $rules = ['full_name' => 'required|min_length[2]', 'email' => 'required|valid_email', 'phone' => 'permit_empty|max_length[20]'];
             if ($this->validate($rules)) {
                 $model->update($id, ['full_name' => trim($this->request->getPost('full_name')), 'email' => trim($this->request->getPost('email')), 'phone' => trim((string) $this->request->getPost('phone'))]);
