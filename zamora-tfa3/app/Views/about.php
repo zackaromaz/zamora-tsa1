@@ -1,0 +1,1 @@
+<?= view('partials/header', ['title' => $title]) ?><p class="eyebrow">About the activity</p><h1>About</h1><section class="card"><h2>POS Management System</h2><p>This CodeIgniter application demonstrates validated create/edit forms and secure profile image uploads for IT0049 TFA3.</p></section><?= view('partials/footer') ?>
